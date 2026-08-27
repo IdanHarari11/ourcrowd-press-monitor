@@ -1,0 +1,85 @@
+{
+  "generatedAt": "2026-08-27T11:26:28.257Z",
+  "newMentionCount": 11,
+  "companiesAffected": 7,
+  "summary": "New press coverage for 7 companies (11 mentions):\n- SSI: 3 new mentions (3 positive)\n- xAI: 2 new mentions (1 negative, 1 neutral)\n- CarDekho: 2 new mentions (2 positive)\n- Tovala: 1 new mention (1 positive)\n- Beyond Meat: 1 new mention (1 neutral)\n- Arbe Robotics: 1 new mention (1 positive)\n- Klook: 1 new mention (1 positive)",
+  "mentions": [
+    {
+      "companyName": "xAI",
+      "title": "Minnesota vs xAI: Do we have the right to nudify?",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNZFlQbzgzVnJ6NWJuWkhQUWVKRmd3SExXN2pWTGk5OW82SGpPVW10RjhYMWhWS2hKWWJEVXZDSDk1QTZBXzJWWUx1dVhjaU5GVGJya19OdC1HUmRZeDVFcnFXNUJYb3k3UDkxZWFhUEdmelpfQWg1c1I2Mkc1NjhUN0kzYnItcElrNS1r?oc=5",
+      "sentiment": "neutral",
+      "publishedAt": "2026-08-21T20:29:29.000Z"
+    },
+    {
+      "companyName": "xAI",
+      "title": "Elon Musk's xAI suing Bentonville photographer accused of using Grok to generate CSAM",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQNGhHbElPQU9DbnRVSmlGLVZLY1RnTnpJeGJUOVc3YU5TaUhkWk11cGZtSE5mYl9oUnIzSS1SZVBDRjZ4RHJKeG9VQktXUUdDRjRaanBTMDJLT2tYRFdsbkZvblMxMHQwd1J2ZUR4aGZGN1ZqcEZxRHJqNDNRTmpNR1k4MWduSURrVjBIRE9rdmFGSnV0UThzRlNCR2VoRGFlM2tCS045T2dvTU1uZDNQVzV3?oc=5",
+      "sentiment": "negative",
+      "publishedAt": "2026-08-21T17:18:41.000Z"
+    },
+    {
+      "companyName": "SSI",
+      "title": "SSI could be set to unveil revolutionary language model - Globes",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNVXZJTzBUUnYydUF0a2hYZ0haVEZVbTN0aXB5QWNkNXE0bW5LSnhzQUpkWXhFNG0xbFlrRl8tMjl5QXBjS0hRWXZIcjFidEtaZWdZWHN1YVMzVkNQRk1fa2wxWVcwRE5RQ1B3WFpvR3I3d1U4UVRBSjdlVFpKYjRQY3lscmlwRmxaY1B0ZlBDOTZQZUMxN2ZrWGNTTzN0QmRKdERR?oc=5",
+      "sentiment": "positive",
+      "publishedAt": "2026-08-26T17:30:33.000Z"
+    },
+    {
+      "companyName": "SSI",
+      "title": "Ilya's Moment of Truth? SSI's First Model Reportedly Debuting This Week, Backed by NVIDIA's $5 Billion Bet",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5RUTVYQlRrT3hWUTBuNXphUm1MNElHeENMSGxkWjZVOE8wSkE2NjdBTFZOOXJtRWh1Q2J0cFB3Z0ZnZmdfX09raW56OENMQ1ZlUzI3YjZQNW81OG1kZ21NeEhXVmx5QkpkUXFMeWd5TVdqTy1pd3c?oc=5",
+      "sentiment": "positive",
+      "publishedAt": "2026-08-25T12:55:00.000Z"
+    },
+    {
+      "companyName": "SSI",
+      "title": "NVIDIA Invests $5 Billion in Ilya Sutskever’s SSI, First Model Expected This Week",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQUldHNGpKaGVUN3VNMno1ZUNjdG5qaGVVNUcxN19oSWpSZE05Unh3Y3NuSFJ4M3BBdDRiY3lKUmFDQUY5Wmo0UzhIcVM5X2sybzVOR0E2cl96UWx3eEc2V2dmaWVQVVp5SGtMS3pZUUNBc1lzb0kwd1Q1R2dPQjVBS1RMczMxSU1tWHdmaGpta3ZWLTdJU3ZLNFRhc2FzY2VlNnBjU1BYNHBHakVFNkdzQW1tRQ?oc=5",
+      "sentiment": "positive",
+      "publishedAt": "2026-08-25T12:44:23.000Z"
+    },
+    {
+      "companyName": "CarDekho",
+      "title": "MG Hector Tomahawk EV Excite 7-Seater On Road Price (Electric(Battery)), Features & Specs, Images",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQUVBRdEQ5YzBMVi14OUtIZHlNUWZfN3lVTTZEdDNBVFVId0xwVmV2SnoxUFVUU080TUVwUjJ1SlZBTFZ1Y1hoU2xPa0o1c1hScUhPMUFnRjltQTJ4SWdEai1uUm5MclBBRXpiZDBIQ0xLeE13Rkk4UVRHTUVqQnhyZ2tHeW5SWE1IR190c1NRUEZETnU1TGY5Qkd5ZnhCUQ?oc=5",
+      "sentiment": "positive",
+      "publishedAt": "2026-08-27T11:06:13.000Z"
+    },
+    {
+      "companyName": "CarDekho",
+      "title": "MG Hector Tomahawk EV Essence 7-Seater On Road Price (Electric(Battery)), Features & Specs, Images",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOZjJpdTVraENrWElPTE1IME9oSHkxU0hkWE9qRGRBRlBmNFFYNHRMZGZVZ09iSjRsR1lldEZlejg3czFzVFpuZkdraFNhSngySTh5RDJ3XzF6ZXZLcTk3Nl9lU3lEWFA5WUhSQUV3ZnZXSTNhak5aYy1WRTRyN0drbUNVTndNTFhXbXo3Qm03NThTT3VmcUY2UmlkUGxkeXc?oc=5",
+      "sentiment": "positive",
+      "publishedAt": "2026-08-27T11:02:35.000Z"
+    },
+    {
+      "companyName": "Tovala",
+      "title": "Tovala Expands Meal Offering With Fly By Jing Chili Crisp Partnership",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOaVBqVUtyNlplQmVEN0ZwaDZ2U0M2bURxQnpTM1QyNnI1THBXZzZXR1VqNmRveWprSDhlWWdEVXhlX3VUTUFlcXRjeU1XMVRoVWNfeFhmX1oydFE3eGhsa2l0eTg0bFh1TmoxN3AzcFJfTTEydmxnanRDUXNaZ2hnVzB4cmEyS3ZHaDFLUWxMOG5WanBkQUd3VnhHdkRmTC1UWThSMGZfQUVsdWpkbThKdFNmdmNrcHot?oc=5",
+      "sentiment": "positive",
+      "publishedAt": "2026-08-19T13:34:06.000Z"
+    },
+    {
+      "companyName": "Beyond Meat",
+      "title": "Edible Garden and Beyond Meat Using Plant Protein to Tap into Functional Beverages",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQalZFS0NxN1NUSjhEVG9saldaai0yUjRZd1BBdW5RcTc4SVc2WHBDNHlIRzhobmhrZnNROE1nWkJEaWNqNXN6TXdVNWMyeDVlSVVqQTFtZV83VVF4cEh2eDF1aHBRNGpxaElWc3hVeExUR0pFVnVnWUtpdVpXcExobmhHSU8xX3U1ZUxjSVp4eFFTSHhJbDE5X242QTRnYzd3M241b3hqaXZfVWpVLW8xUkxaWUZJUExYaURKZkIyS0ltdw?oc=5",
+      "sentiment": "neutral",
+      "publishedAt": "2026-08-26T13:41:14.000Z"
+    },
+    {
+      "companyName": "Arbe Robotics",
+      "title": "Arbe Robotics Ltd (ARBE) Earnings Forecast: Future EPS & Revenue Growth Estimates",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1YZFRCemRGSjhaNFhDSzhXaDVRRlVwWVZKdDhNOFlMQnJfT0ZCTDViRl9ZU05oVUdkRkVHYkZCZjV4LWJ4d3JGRWVNSXN5TVdDQUE3MHE2bTRjWXM1aTdBY25YbFRhdw?oc=5",
+      "sentiment": "positive",
+      "publishedAt": "2026-08-16T07:00:00.000Z"
+    },
+    {
+      "companyName": "Klook",
+      "title": "Klook and Mastercard collaborate to enhance travelers' experiences across Asia Pacific",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5WWTV3bzVvXzB4anU5LTNkeDM3blVkV3F4S0hvT1E1d1c3bnNaUW5lSzlUUkdoMGtLT3FORWdxbHd5RW9Nc09pcEg0elpTR2N5TnNpeDVtNmFUQQ?oc=5",
+      "sentiment": "positive",
+      "publishedAt": "2026-08-27T02:52:00.000Z"
+    }
+  ]
+}

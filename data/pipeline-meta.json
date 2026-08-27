@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-08-27T11:26:28.250Z",
+  "quarterStart": "2026-05-29T11:26:28.250Z",
+  "quarterEnd": "2026-08-27T11:26:28.250Z",
+  "model": "llama3.2:3b",
+  "companiesTracked": 258,
+  "mentionsCollected": 911,
+  "mentionsClassified": 911,
+  "relevantMentions": 403,
+  "collectionErrors": 0
+}

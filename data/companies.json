@@ -1,0 +1,1842 @@
+[
+  {
+    "name": "ZutaCore",
+    "searchName": "ZutaCore",
+    "aliases": [],
+    "id": "zutacore",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Maolac",
+    "searchName": "Maolac",
+    "aliases": [],
+    "id": "maolac",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Biolojic Design",
+    "searchName": "Biolojic Design",
+    "aliases": [],
+    "id": "biolojic-design",
+    "isAmbiguous": false
+  },
+  {
+    "name": "OncoHost",
+    "searchName": "OncoHost",
+    "aliases": [],
+    "id": "oncohost",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Morphisec",
+    "searchName": "Morphisec",
+    "aliases": [],
+    "id": "morphisec",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Harvey",
+    "searchName": "Harvey",
+    "aliases": [],
+    "id": "harvey",
+    "isAmbiguous": true
+  },
+  {
+    "name": "OpenEvidence",
+    "searchName": "OpenEvidence",
+    "aliases": [],
+    "id": "openevidence",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Stripe",
+    "searchName": "Stripe",
+    "aliases": [],
+    "id": "stripe",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Cerebras",
+    "searchName": "Cerebras",
+    "aliases": [],
+    "id": "cerebras",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Together AI",
+    "searchName": "Together AI",
+    "aliases": [],
+    "id": "together-ai",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Harbinger Motors",
+    "searchName": "Harbinger Motors",
+    "aliases": [],
+    "id": "harbinger-motors",
+    "isAmbiguous": false
+  },
+  {
+    "name": "TensorWave",
+    "searchName": "TensorWave",
+    "aliases": [],
+    "id": "tensorwave",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Glean",
+    "searchName": "Glean",
+    "aliases": [],
+    "id": "glean",
+    "isAmbiguous": false
+  },
+  {
+    "name": "SpaceX",
+    "searchName": "SpaceX",
+    "aliases": [],
+    "id": "spacex",
+    "isAmbiguous": false
+  },
+  {
+    "name": "DeepKeep",
+    "searchName": "DeepKeep",
+    "aliases": [],
+    "id": "deepkeep",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Lambda",
+    "searchName": "Lambda",
+    "aliases": [],
+    "domain": "lambda.ai",
+    "id": "lambda",
+    "isAmbiguous": false
+  },
+  {
+    "name": "SSI",
+    "searchName": "SSI",
+    "aliases": [
+      "Safe Superintelligence"
+    ],
+    "notes": "Safe Superintelligence",
+    "id": "ssi",
+    "isAmbiguous": true
+  },
+  {
+    "name": "xAI",
+    "searchName": "xAI",
+    "aliases": [],
+    "id": "xai",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Island",
+    "searchName": "Island",
+    "aliases": [],
+    "id": "island",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Velotix",
+    "searchName": "Velotix",
+    "aliases": [],
+    "id": "velotix",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Databricks",
+    "searchName": "Databricks",
+    "aliases": [],
+    "id": "databricks",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Ayar Labs",
+    "searchName": "Ayar Labs",
+    "aliases": [],
+    "id": "ayar-labs",
+    "isAmbiguous": false
+  },
+  {
+    "name": "RepAir Carbon",
+    "searchName": "RepAir Carbon",
+    "aliases": [],
+    "id": "repair-carbon",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Kardome",
+    "searchName": "Kardome",
+    "aliases": [],
+    "id": "kardome",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Omnix Medical",
+    "searchName": "Omnix Medical",
+    "aliases": [],
+    "id": "omnix-medical",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Kodiak Robotics",
+    "searchName": "Kodiak Robotics",
+    "aliases": [],
+    "id": "kodiak-robotics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Scale AI",
+    "searchName": "Scale AI",
+    "aliases": [],
+    "id": "scale-ai",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Spot AI",
+    "searchName": "Spot AI",
+    "aliases": [],
+    "id": "spot-ai",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Siteaware",
+    "searchName": "Siteaware",
+    "aliases": [],
+    "id": "siteaware",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Ukko",
+    "searchName": "Ukko",
+    "aliases": [],
+    "id": "ukko",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Groq",
+    "searchName": "Groq",
+    "aliases": [],
+    "id": "groq",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Anthropic",
+    "searchName": "Anthropic",
+    "aliases": [],
+    "id": "anthropic",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Bites",
+    "searchName": "Bites",
+    "aliases": [],
+    "id": "bites",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Atlas Obscura",
+    "searchName": "Atlas Obscura",
+    "aliases": [],
+    "id": "atlas-obscura",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Stoke Space",
+    "searchName": "Stoke Space",
+    "aliases": [],
+    "id": "stoke-space",
+    "isAmbiguous": false
+  },
+  {
+    "name": "SeeTree",
+    "searchName": "SeeTree",
+    "aliases": [],
+    "id": "seetree",
+    "isAmbiguous": false
+  },
+  {
+    "name": "OneAI",
+    "searchName": "OneAI",
+    "aliases": [],
+    "id": "oneai",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Edity Therapeutics",
+    "searchName": "Edity Therapeutics",
+    "aliases": [],
+    "id": "edity-therapeutics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Carrar",
+    "searchName": "Carrar",
+    "aliases": [],
+    "id": "carrar",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Quidnet Energy",
+    "searchName": "Quidnet Energy",
+    "aliases": [],
+    "id": "quidnet-energy",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Lano",
+    "searchName": "Lano",
+    "aliases": [],
+    "id": "lano",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Flash Forest",
+    "searchName": "Flash Forest",
+    "aliases": [],
+    "id": "flash-forest",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Kando",
+    "searchName": "Kando",
+    "aliases": [],
+    "id": "kando",
+    "isAmbiguous": false
+  },
+  {
+    "name": "NT-Tao",
+    "searchName": "NT-Tao",
+    "aliases": [],
+    "id": "nt-tao",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Neolithics",
+    "searchName": "Neolithics",
+    "aliases": [],
+    "id": "neolithics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Arrow Global",
+    "searchName": "Arrow Global",
+    "aliases": [],
+    "id": "arrow-global",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Air EV",
+    "searchName": "Air EV",
+    "aliases": [],
+    "id": "air-ev",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Ursa Major",
+    "searchName": "Ursa Major",
+    "aliases": [],
+    "id": "ursa-major",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Quai.MD",
+    "searchName": "Quai.MD",
+    "aliases": [],
+    "id": "quai-md",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Cyfirma",
+    "searchName": "Cyfirma",
+    "aliases": [],
+    "id": "cyfirma",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Ludeo",
+    "searchName": "Ludeo",
+    "aliases": [
+      "Edge"
+    ],
+    "notes": "formerly Edge",
+    "id": "ludeo",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Lightico",
+    "searchName": "Lightico",
+    "aliases": [],
+    "id": "lightico",
+    "isAmbiguous": false
+  },
+  {
+    "name": "3d Signals",
+    "searchName": "3d Signals",
+    "aliases": [],
+    "id": "3d-signals",
+    "isAmbiguous": false
+  },
+  {
+    "name": "IQM",
+    "searchName": "IQM",
+    "aliases": [],
+    "id": "iqm",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Kini",
+    "searchName": "Kini",
+    "aliases": [],
+    "id": "kini",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Liquid Instruments",
+    "searchName": "Liquid Instruments",
+    "aliases": [],
+    "id": "liquid-instruments",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Sotero",
+    "searchName": "Sotero",
+    "aliases": [],
+    "id": "sotero",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Connected Energy",
+    "searchName": "Connected Energy",
+    "aliases": [],
+    "id": "connected-energy",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BetterSeeds",
+    "searchName": "BetterSeeds",
+    "aliases": [],
+    "id": "betterseeds",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Oshi",
+    "searchName": "Oshi",
+    "aliases": [
+      "Plantish"
+    ],
+    "notes": "formerly Plantish",
+    "id": "oshi",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Genopore",
+    "searchName": "Genopore",
+    "aliases": [],
+    "id": "genopore",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Mermade Seafoods",
+    "searchName": "Mermade Seafoods",
+    "aliases": [],
+    "id": "mermade-seafoods",
+    "isAmbiguous": false
+  },
+  {
+    "name": "ProFuse",
+    "searchName": "ProFuse",
+    "aliases": [],
+    "id": "profuse",
+    "isAmbiguous": false
+  },
+  {
+    "name": "AEYE Health",
+    "searchName": "AEYE Health",
+    "aliases": [],
+    "id": "aeye-health",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Workspot",
+    "searchName": "Workspot",
+    "aliases": [],
+    "id": "workspot",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Spectrum Labs",
+    "searchName": "Spectrum Labs",
+    "aliases": [],
+    "id": "spectrum-labs",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Anodot",
+    "searchName": "Anodot",
+    "aliases": [],
+    "id": "anodot",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Xage Security",
+    "searchName": "Xage Security",
+    "aliases": [],
+    "id": "xage-security",
+    "isAmbiguous": false
+  },
+  {
+    "name": "IronVest",
+    "searchName": "IronVest",
+    "aliases": [],
+    "id": "ironvest",
+    "isAmbiguous": false
+  },
+  {
+    "name": "The EVERY Company",
+    "searchName": "The EVERY Company",
+    "aliases": [],
+    "id": "the-every-company",
+    "isAmbiguous": true
+  },
+  {
+    "name": "InsideTracker",
+    "searchName": "InsideTracker",
+    "aliases": [],
+    "id": "insidetracker",
+    "isAmbiguous": false
+  },
+  {
+    "name": "CarDekho",
+    "searchName": "CarDekho",
+    "aliases": [],
+    "id": "cardekho",
+    "isAmbiguous": false
+  },
+  {
+    "name": "One Zero Digital Bank Ltd.",
+    "searchName": "One Zero Digital Bank Ltd.",
+    "aliases": [],
+    "id": "one-zero-digital-bank-ltd",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Binah.ai",
+    "searchName": "Binah.ai",
+    "aliases": [],
+    "id": "binah-ai",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Eko Health",
+    "searchName": "Eko Health",
+    "aliases": [],
+    "id": "eko-health",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Cycuity",
+    "searchName": "Cycuity",
+    "aliases": [
+      "Tortuga Logic"
+    ],
+    "notes": "formerly Tortuga Logic",
+    "id": "cycuity",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Peak",
+    "searchName": "Peak",
+    "aliases": [],
+    "id": "peak",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Oriient",
+    "searchName": "Oriient",
+    "aliases": [],
+    "id": "oriient",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Tabnine",
+    "searchName": "Tabnine",
+    "aliases": [],
+    "id": "tabnine",
+    "isAmbiguous": false
+  },
+  {
+    "name": "InZiv",
+    "searchName": "InZiv",
+    "aliases": [],
+    "id": "inziv",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BlueTree Technologies",
+    "searchName": "BlueTree Technologies",
+    "aliases": [],
+    "id": "bluetree-technologies",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BioLumic",
+    "searchName": "BioLumic",
+    "aliases": [],
+    "id": "biolumic",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Orchard",
+    "searchName": "Orchard",
+    "aliases": [],
+    "id": "orchard",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Tailor Brands",
+    "searchName": "Tailor Brands",
+    "aliases": [],
+    "id": "tailor-brands",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Flytrex",
+    "searchName": "Flytrex",
+    "aliases": [],
+    "id": "flytrex",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Quantum Machines",
+    "searchName": "Quantum Machines",
+    "aliases": [],
+    "id": "quantum-machines",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Sufresca",
+    "searchName": "Sufresca",
+    "aliases": [],
+    "id": "sufresca",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Guild",
+    "searchName": "Guild",
+    "aliases": [],
+    "id": "guild",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Sfara",
+    "searchName": "Sfara",
+    "aliases": [],
+    "id": "sfara",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Zippin",
+    "searchName": "Zippin",
+    "aliases": [],
+    "id": "zippin",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Privateer",
+    "searchName": "Privateer",
+    "aliases": [],
+    "id": "privateer",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Cordio Medical",
+    "searchName": "Cordio Medical",
+    "aliases": [],
+    "id": "cordio-medical",
+    "isAmbiguous": false
+  },
+  {
+    "name": "wefox",
+    "searchName": "wefox",
+    "aliases": [],
+    "id": "wefox",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Moodify",
+    "searchName": "Moodify",
+    "aliases": [],
+    "id": "moodify",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Polaris Quantum Biotech",
+    "searchName": "Polaris Quantum Biotech",
+    "aliases": [],
+    "id": "polaris-quantum-biotech",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Alloy Therapeutics",
+    "searchName": "Alloy Therapeutics",
+    "aliases": [],
+    "id": "alloy-therapeutics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Ynsect",
+    "searchName": "Ynsect",
+    "aliases": [],
+    "id": "ynsect",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Treedom",
+    "searchName": "Treedom",
+    "aliases": [],
+    "id": "treedom",
+    "isAmbiguous": false
+  },
+  {
+    "name": "MaterialsZone",
+    "searchName": "MaterialsZone",
+    "aliases": [],
+    "id": "materialszone",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BrightInsight",
+    "searchName": "BrightInsight",
+    "aliases": [],
+    "id": "brightinsight",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Launchpad",
+    "searchName": "Launchpad",
+    "aliases": [],
+    "id": "launchpad",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Sequentify",
+    "searchName": "Sequentify",
+    "aliases": [],
+    "id": "sequentify",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Tamar Robotics",
+    "searchName": "Tamar Robotics",
+    "aliases": [],
+    "id": "tamar-robotics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Entangled Networks",
+    "searchName": "Entangled Networks",
+    "aliases": [],
+    "id": "entangled-networks",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Dandelion Energy",
+    "searchName": "Dandelion Energy",
+    "aliases": [],
+    "id": "dandelion-energy",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Shield",
+    "searchName": "Shield",
+    "aliases": [],
+    "id": "shield",
+    "isAmbiguous": true
+  },
+  {
+    "name": "People.ai",
+    "searchName": "People.ai",
+    "aliases": [],
+    "id": "people-ai",
+    "isAmbiguous": true
+  },
+  {
+    "name": "H2Pro",
+    "searchName": "H2Pro",
+    "aliases": [],
+    "id": "h2pro",
+    "isAmbiguous": false
+  },
+  {
+    "name": "JumpCloud",
+    "searchName": "JumpCloud",
+    "aliases": [],
+    "id": "jumpcloud",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Future Family",
+    "searchName": "Future Family",
+    "aliases": [],
+    "id": "future-family",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Remilk",
+    "searchName": "Remilk",
+    "aliases": [],
+    "id": "remilk",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Ordergroove",
+    "searchName": "Ordergroove",
+    "aliases": [],
+    "id": "ordergroove",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Clinch",
+    "searchName": "Clinch",
+    "aliases": [],
+    "id": "clinch",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BlueGreen Water Technologies",
+    "searchName": "BlueGreen Water Technologies",
+    "aliases": [],
+    "id": "bluegreen-water-technologies",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Classiq",
+    "searchName": "Classiq",
+    "aliases": [],
+    "id": "classiq",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Diagnostic Robotics",
+    "searchName": "Diagnostic Robotics",
+    "aliases": [],
+    "id": "diagnostic-robotics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Overtime",
+    "searchName": "Overtime",
+    "aliases": [],
+    "id": "overtime",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Dataloop",
+    "searchName": "Dataloop",
+    "aliases": [],
+    "id": "dataloop",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Greenlight",
+    "searchName": "Greenlight",
+    "aliases": [],
+    "id": "greenlight",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Cyabra",
+    "searchName": "Cyabra",
+    "aliases": [],
+    "id": "cyabra",
+    "isAmbiguous": false
+  },
+  {
+    "name": "C2A Security",
+    "searchName": "C2A Security",
+    "aliases": [],
+    "id": "c2a-security",
+    "isAmbiguous": false
+  },
+  {
+    "name": "MasterClass",
+    "searchName": "MasterClass",
+    "aliases": [],
+    "id": "masterclass",
+    "isAmbiguous": false
+  },
+  {
+    "name": "HEQA Security",
+    "searchName": "HEQA Security",
+    "aliases": [
+      "QuantLR"
+    ],
+    "notes": "formerly QuantLR",
+    "id": "heqa-security",
+    "isAmbiguous": false
+  },
+  {
+    "name": "CytoReason",
+    "searchName": "CytoReason",
+    "aliases": [],
+    "id": "cytoreason",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Tovala",
+    "searchName": "Tovala",
+    "aliases": [],
+    "id": "tovala",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Ro",
+    "searchName": "Ro",
+    "aliases": [],
+    "id": "ro",
+    "isAmbiguous": true
+  },
+  {
+    "name": "MigVax",
+    "searchName": "MigVax",
+    "aliases": [],
+    "id": "migvax",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Skillz",
+    "searchName": "Skillz",
+    "aliases": [],
+    "id": "skillz",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BlueCircle",
+    "searchName": "BlueCircle",
+    "aliases": [
+      "Trellis"
+    ],
+    "notes": "formerly Trellis",
+    "id": "bluecircle",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Near",
+    "searchName": "Near",
+    "aliases": [],
+    "id": "near",
+    "isAmbiguous": true
+  },
+  {
+    "name": "CyberX",
+    "searchName": "CyberX",
+    "aliases": [],
+    "id": "cyberx",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Celeno",
+    "searchName": "Celeno",
+    "aliases": [],
+    "id": "celeno",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Kenna Security",
+    "searchName": "Kenna Security",
+    "aliases": [],
+    "id": "kenna-security",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Wayup",
+    "searchName": "Wayup",
+    "aliases": [],
+    "id": "wayup",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Nanorep",
+    "searchName": "Nanorep",
+    "aliases": [],
+    "id": "nanorep",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Taranis",
+    "searchName": "Taranis",
+    "aliases": [],
+    "id": "taranis",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Momentis Surgical",
+    "searchName": "Momentis Surgical",
+    "aliases": [
+      "Memic"
+    ],
+    "notes": "formerly Memic",
+    "id": "momentis-surgical",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Argus Cyber Security",
+    "searchName": "Argus Cyber Security",
+    "aliases": [],
+    "id": "argus-cyber-security",
+    "isAmbiguous": false
+  },
+  {
+    "name": "The Bouqs",
+    "searchName": "The Bouqs",
+    "aliases": [],
+    "id": "the-bouqs",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Zoomcar",
+    "searchName": "Zoomcar",
+    "aliases": [],
+    "id": "zoomcar",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Sweetch",
+    "searchName": "Sweetch",
+    "aliases": [],
+    "id": "sweetch",
+    "isAmbiguous": false
+  },
+  {
+    "name": "TechSee",
+    "searchName": "TechSee",
+    "aliases": [],
+    "id": "techsee",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Replay Technologies",
+    "searchName": "Replay Technologies",
+    "aliases": [],
+    "id": "replay-technologies",
+    "isAmbiguous": false
+  },
+  {
+    "name": "NooBaa",
+    "searchName": "NooBaa",
+    "aliases": [],
+    "id": "noobaa",
+    "isAmbiguous": false
+  },
+  {
+    "name": "mPrest",
+    "searchName": "mPrest",
+    "aliases": [],
+    "id": "mprest",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Amitree",
+    "searchName": "Amitree",
+    "aliases": [],
+    "id": "amitree",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Wave",
+    "searchName": "Wave",
+    "aliases": [],
+    "id": "wave",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Firefly Neuroscience",
+    "searchName": "Firefly Neuroscience",
+    "aliases": [
+      "ElMindA"
+    ],
+    "notes": "formerly ElMindA",
+    "id": "firefly-neuroscience",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Syqe",
+    "searchName": "Syqe",
+    "aliases": [],
+    "id": "syqe",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Ubimo",
+    "searchName": "Ubimo",
+    "aliases": [],
+    "id": "ubimo",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BIScience",
+    "searchName": "BIScience",
+    "aliases": [],
+    "id": "biscience",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Verse.ai",
+    "searchName": "Verse.ai",
+    "aliases": [],
+    "id": "verse-ai",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Global Kinetics",
+    "searchName": "Global Kinetics",
+    "aliases": [],
+    "id": "global-kinetics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Zebra Medical Vision",
+    "searchName": "Zebra Medical Vision",
+    "aliases": [],
+    "id": "zebra-medical-vision",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Corephotonics",
+    "searchName": "Corephotonics",
+    "aliases": [],
+    "id": "corephotonics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "JUMP Bikes",
+    "searchName": "JUMP Bikes",
+    "aliases": [],
+    "id": "jump-bikes",
+    "isAmbiguous": false
+  },
+  {
+    "name": "UPnRIDE",
+    "searchName": "UPnRIDE",
+    "aliases": [],
+    "id": "upnride",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Appforma",
+    "searchName": "Appforma",
+    "aliases": [],
+    "id": "appforma",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Nextpeer",
+    "searchName": "Nextpeer",
+    "aliases": [],
+    "id": "nextpeer",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Parko",
+    "searchName": "Parko",
+    "aliases": [],
+    "id": "parko",
+    "isAmbiguous": false
+  },
+  {
+    "name": "PulmOne",
+    "searchName": "PulmOne",
+    "aliases": [],
+    "id": "pulmone",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Shopial",
+    "searchName": "Shopial",
+    "aliases": [],
+    "id": "shopial",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Fireblade",
+    "searchName": "Fireblade",
+    "aliases": [],
+    "id": "fireblade",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Freightos",
+    "searchName": "Freightos",
+    "aliases": [],
+    "id": "freightos",
+    "isAmbiguous": false
+  },
+  {
+    "name": "The Trendlines Group",
+    "searchName": "The Trendlines Group",
+    "aliases": [],
+    "id": "the-trendlines-group",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Viewbix",
+    "searchName": "Viewbix",
+    "aliases": [],
+    "id": "viewbix",
+    "isAmbiguous": false
+  },
+  {
+    "name": "eVigilo",
+    "searchName": "eVigilo",
+    "aliases": [],
+    "id": "evigilo",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Appdome",
+    "searchName": "Appdome",
+    "aliases": [],
+    "id": "appdome",
+    "isAmbiguous": false
+  },
+  {
+    "name": "enVerid",
+    "searchName": "enVerid",
+    "aliases": [],
+    "id": "enverid",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Crosswise",
+    "searchName": "Crosswise",
+    "aliases": [],
+    "id": "crosswise",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Abes Market",
+    "searchName": "Abes Market",
+    "aliases": [],
+    "id": "abes-market",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Surgical Theater",
+    "searchName": "Surgical Theater",
+    "aliases": [],
+    "id": "surgical-theater",
+    "isAmbiguous": false
+  },
+  {
+    "name": "MST",
+    "searchName": "MST",
+    "aliases": [],
+    "id": "mst",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Bizzabo",
+    "searchName": "Bizzabo",
+    "aliases": [],
+    "id": "bizzabo",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Neverware",
+    "searchName": "Neverware",
+    "aliases": [],
+    "id": "neverware",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BioCatch",
+    "searchName": "BioCatch",
+    "aliases": [],
+    "id": "biocatch",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Sight Diagnostics",
+    "searchName": "Sight Diagnostics",
+    "aliases": [],
+    "id": "sight-diagnostics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Consumer Physics",
+    "searchName": "Consumer Physics",
+    "aliases": [],
+    "id": "consumer-physics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "StackIQ",
+    "searchName": "StackIQ",
+    "aliases": [],
+    "id": "stackiq",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Mentad",
+    "searchName": "Mentad",
+    "aliases": [],
+    "id": "mentad",
+    "isAmbiguous": false
+  },
+  {
+    "name": "CropX",
+    "searchName": "CropX",
+    "aliases": [],
+    "id": "cropx",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Powwow",
+    "searchName": "Powwow",
+    "aliases": [],
+    "id": "powwow",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Apploi",
+    "searchName": "Apploi",
+    "aliases": [],
+    "id": "apploi",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Lifeward",
+    "searchName": "Lifeward",
+    "aliases": [
+      "ReWalk"
+    ],
+    "notes": "formerly known as ReWalk",
+    "id": "lifeward",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Cimagine",
+    "searchName": "Cimagine",
+    "aliases": [],
+    "id": "cimagine",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Boatsetter",
+    "searchName": "Boatsetter",
+    "aliases": [],
+    "id": "boatsetter",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Stringify",
+    "searchName": "Stringify",
+    "aliases": [],
+    "id": "stringify",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BriefCam",
+    "searchName": "BriefCam",
+    "aliases": [],
+    "id": "briefcam",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BillGuard",
+    "searchName": "BillGuard",
+    "aliases": [],
+    "id": "billguard",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Xsense",
+    "searchName": "Xsense",
+    "aliases": [
+      "BT9"
+    ],
+    "notes": "formerly BT9",
+    "id": "xsense",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Astra",
+    "searchName": "Astra",
+    "aliases": [],
+    "id": "astra",
+    "isAmbiguous": true
+  },
+  {
+    "name": "NeuReality",
+    "searchName": "NeuReality",
+    "aliases": [],
+    "id": "neureality",
+    "isAmbiguous": false
+  },
+  {
+    "name": "EquipmentShare",
+    "searchName": "EquipmentShare",
+    "aliases": [],
+    "id": "equipmentshare",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Hub Security",
+    "searchName": "Hub Security",
+    "aliases": [],
+    "id": "hub-security",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BlueNalu",
+    "searchName": "BlueNalu",
+    "aliases": [],
+    "id": "bluenalu",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Medisafe",
+    "searchName": "Medisafe",
+    "aliases": [],
+    "id": "medisafe",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Ravin AI",
+    "searchName": "Ravin AI",
+    "aliases": [],
+    "id": "ravin-ai",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Kemtai",
+    "searchName": "Kemtai",
+    "aliases": [],
+    "id": "kemtai",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Kryon Systems",
+    "searchName": "Kryon Systems",
+    "aliases": [],
+    "id": "kryon-systems",
+    "isAmbiguous": false
+  },
+  {
+    "name": "TubiTV",
+    "searchName": "TubiTV",
+    "aliases": [],
+    "id": "tubitv",
+    "isAmbiguous": false
+  },
+  {
+    "name": "NetOp",
+    "searchName": "NetOp",
+    "aliases": [],
+    "id": "netop",
+    "isAmbiguous": false
+  },
+  {
+    "name": "CorrActions",
+    "searchName": "CorrActions",
+    "aliases": [],
+    "id": "corractions",
+    "isAmbiguous": false
+  },
+  {
+    "name": "SaNOtize",
+    "searchName": "SaNOtize",
+    "aliases": [],
+    "id": "sanotize",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Stellar Cyber",
+    "searchName": "Stellar Cyber",
+    "aliases": [],
+    "id": "stellar-cyber",
+    "isAmbiguous": false
+  },
+  {
+    "name": "SeeTrue",
+    "searchName": "SeeTrue",
+    "aliases": [],
+    "id": "seetrue",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Perception Point",
+    "searchName": "Perception Point",
+    "aliases": [],
+    "id": "perception-point",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Innovalve",
+    "searchName": "Innovalve",
+    "aliases": [],
+    "id": "innovalve",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Tala",
+    "searchName": "Tala",
+    "aliases": [],
+    "id": "tala",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Signals Analytics",
+    "searchName": "Signals Analytics",
+    "aliases": [],
+    "id": "signals-analytics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "PlaySight",
+    "searchName": "PlaySight",
+    "aliases": [],
+    "id": "playsight",
+    "isAmbiguous": false
+  },
+  {
+    "name": "EduNav",
+    "searchName": "EduNav",
+    "aliases": [],
+    "id": "edunav",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Barcode Nanotech",
+    "searchName": "Barcode Nanotech",
+    "aliases": [],
+    "id": "barcode-nanotech",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Ride Vision",
+    "searchName": "Ride Vision",
+    "aliases": [],
+    "id": "ride-vision",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Frontier Car Group",
+    "searchName": "Frontier Car Group",
+    "aliases": [],
+    "id": "frontier-car-group",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Autobrains",
+    "searchName": "Autobrains",
+    "aliases": [],
+    "id": "autobrains",
+    "isAmbiguous": false
+  },
+  {
+    "name": "DailyPay",
+    "searchName": "DailyPay",
+    "aliases": [],
+    "id": "dailypay",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Sayata",
+    "searchName": "Sayata",
+    "aliases": [],
+    "id": "sayata",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Locusview",
+    "searchName": "Locusview",
+    "aliases": [],
+    "id": "locusview",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Juganu",
+    "searchName": "Juganu",
+    "aliases": [],
+    "id": "juganu",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Nanomedic",
+    "searchName": "Nanomedic",
+    "aliases": [],
+    "id": "nanomedic",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Incredo",
+    "searchName": "Incredo",
+    "aliases": [
+      "DouxMatok"
+    ],
+    "notes": "formerly known as DouxMatok",
+    "id": "incredo",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Casper",
+    "searchName": "Casper",
+    "aliases": [],
+    "id": "casper",
+    "isAmbiguous": true
+  },
+  {
+    "name": "CB4",
+    "searchName": "CB4",
+    "aliases": [],
+    "id": "cb4",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Foretellix",
+    "searchName": "Foretellix",
+    "aliases": [],
+    "id": "foretellix",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Neura",
+    "searchName": "Neura",
+    "aliases": [],
+    "id": "neura",
+    "isAmbiguous": false
+  },
+  {
+    "name": "ItsMine",
+    "searchName": "ItsMine",
+    "aliases": [],
+    "id": "itsmine",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Tevel",
+    "searchName": "Tevel",
+    "aliases": [],
+    "id": "tevel",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Trusona",
+    "searchName": "Trusona",
+    "aliases": [],
+    "id": "trusona",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Beyond Meat",
+    "searchName": "Beyond Meat",
+    "aliases": [],
+    "id": "beyond-meat",
+    "isAmbiguous": false
+  },
+  {
+    "name": "HoneyBook",
+    "searchName": "HoneyBook",
+    "aliases": [],
+    "id": "honeybook",
+    "isAmbiguous": true
+  },
+  {
+    "name": "RealView Imaging",
+    "searchName": "RealView Imaging",
+    "aliases": [],
+    "id": "realview-imaging",
+    "isAmbiguous": false
+  },
+  {
+    "name": "CyberMDX",
+    "searchName": "CyberMDX",
+    "aliases": [],
+    "id": "cybermdx",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Alpha Tau",
+    "searchName": "Alpha Tau",
+    "aliases": [],
+    "id": "alpha-tau",
+    "isAmbiguous": false
+  },
+  {
+    "name": "ThetaRay",
+    "searchName": "ThetaRay",
+    "aliases": [],
+    "id": "thetaray",
+    "isAmbiguous": false
+  },
+  {
+    "name": "VAYAVISION",
+    "searchName": "VAYAVISION",
+    "aliases": [],
+    "id": "vayavision",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Insightec",
+    "searchName": "Insightec",
+    "aliases": [],
+    "id": "insightec",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Cognigo",
+    "searchName": "Cognigo",
+    "aliases": [],
+    "id": "cognigo",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Ossio",
+    "searchName": "Ossio",
+    "aliases": [],
+    "id": "ossio",
+    "isAmbiguous": false
+  },
+  {
+    "name": "MeMed",
+    "searchName": "MeMed",
+    "aliases": [],
+    "id": "memed",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Arbe Robotics",
+    "searchName": "Arbe Robotics",
+    "aliases": [],
+    "id": "arbe-robotics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Lemonade",
+    "searchName": "Lemonade",
+    "aliases": [],
+    "id": "lemonade",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Hailo",
+    "searchName": "Hailo",
+    "aliases": [],
+    "id": "hailo",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Sense Education",
+    "searchName": "Sense Education",
+    "aliases": [],
+    "id": "sense-education",
+    "isAmbiguous": true
+  },
+  {
+    "name": "Unispectral",
+    "searchName": "Unispectral",
+    "aliases": [],
+    "id": "unispectral",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Klook",
+    "searchName": "Klook",
+    "aliases": [],
+    "id": "klook",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Innoviz",
+    "searchName": "Innoviz",
+    "aliases": [],
+    "id": "innoviz",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Rewire",
+    "searchName": "Rewire",
+    "aliases": [],
+    "id": "rewire",
+    "isAmbiguous": false
+  },
+  {
+    "name": "YuLife",
+    "searchName": "YuLife",
+    "aliases": [],
+    "id": "yulife",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Edgybees",
+    "searchName": "Edgybees",
+    "aliases": [],
+    "id": "edgybees",
+    "isAmbiguous": false
+  },
+  {
+    "name": "DreaMed Diabetes",
+    "searchName": "DreaMed Diabetes",
+    "aliases": [],
+    "id": "dreamed-diabetes",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Magisto",
+    "searchName": "Magisto",
+    "aliases": [],
+    "id": "magisto",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Virgin Hyperloop One",
+    "searchName": "Virgin Hyperloop One",
+    "aliases": [],
+    "id": "virgin-hyperloop-one",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Airobotics",
+    "searchName": "Airobotics",
+    "aliases": [],
+    "id": "airobotics",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Scopio Labs",
+    "searchName": "Scopio Labs",
+    "aliases": [],
+    "id": "scopio-labs",
+    "isAmbiguous": false
+  },
+  {
+    "name": "BeetleSat",
+    "searchName": "BeetleSat",
+    "aliases": [],
+    "id": "beetlesat",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Silo",
+    "searchName": "Silo",
+    "aliases": [],
+    "id": "silo",
+    "isAmbiguous": true
+  },
+  {
+    "name": "BrainQ Technologies",
+    "searchName": "BrainQ Technologies",
+    "aliases": [],
+    "id": "brainq-technologies",
+    "isAmbiguous": false
+  },
+  {
+    "name": "Intuition Robotics",
+    "searchName": "Intuition Robotics",
+    "aliases": [],
+    "id": "intuition-robotics",
+    "isAmbiguous": false
+  }
+]

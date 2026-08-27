@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="OurCrowd Press Monitor">
+  <rect width="32" height="32" rx="6" fill="#0b0e14"/>
+  <rect x="6" y="7" width="12" height="18" rx="1.5" fill="#f4f6f8"/>
+  <rect x="8" y="11" width="8" height="2" rx="0.6" fill="#0b0e14"/>
+  <rect x="8" y="15.5" width="6" height="2" rx="0.6" fill="#0b0e14"/>
+  <rect x="8" y="20" width="8" height="2" rx="0.6" fill="#0b0e14"/>
+  <circle cx="23" cy="22" r="6" fill="#4ba6dc"/>
+</svg>
