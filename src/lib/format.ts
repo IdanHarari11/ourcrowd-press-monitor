@@ -1,3 +1,4 @@
+import { isRunStale } from "./run-phase";
 import type { Mention, PipelineMeta, PipelineRun, RunPhase } from "./types";
 
 export function formatDate(iso: string | null): string {
@@ -127,8 +128,15 @@ export function relevantMentionsForCompany(mentions: Mention[], companyId: strin
     .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
 }
 
-export function lastRunFrom(meta: PipelineMeta | null, run: PipelineRun | null): { at: string | null; status: RunPhase } {
+export function lastRunFrom(
+  meta: PipelineMeta | null,
+  run: PipelineRun | null,
+  now = new Date(),
+): { at: string | null; status: RunPhase } {
   if (run) {
+    if (isRunStale(run, now.getTime())) {
+      return { at: run.startedAt, status: "failed" };
+    }
     return { at: run.finishedAt ?? run.startedAt, status: run.status };
   }
   if (meta) return { at: meta.generatedAt, status: "success" };

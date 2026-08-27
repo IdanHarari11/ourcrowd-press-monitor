@@ -4,12 +4,18 @@ import { log } from "./cli";
 import { pingClassifier } from "./classifier";
 import { buildAlert, diffNewMentions, notifyAlert } from "./alerts";
 import { runCollect, runClassify, runIngest, runStatusAndMeta } from "./pipeline";
+import { failRun } from "./run-phase";
 import { loadMentions, loadSnapshotIds, saveAlert, saveRunStatus, saveSnapshotIds } from "./storage";
 import type { AlertPayload, PipelineRun } from "./types";
 
 export interface DailyCheckOptions {
   skipFetch?: boolean;
   skipIngest?: boolean;
+  collectLimit?: number;
+  classifyLimit?: number;
+  preferStale?: boolean;
+  deadlineAt?: number;
+  collectConcurrency?: number;
 }
 
 export async function runDailyCheck(options: DailyCheckOptions = {}): Promise<AlertPayload> {
@@ -21,9 +27,21 @@ export async function runDailyCheck(options: DailyCheckOptions = {}): Promise<Al
       if (!options.skipIngest) {
         await runIngest();
       }
-      await runCollect();
-      await pingClassifier();
-      await runClassify();
+      await runCollect({
+        limit: options.collectLimit,
+        preferStale: options.preferStale,
+        deadlineAt: options.deadlineAt,
+        concurrency: options.collectConcurrency,
+      });
+      if (!options.deadlineAt || Date.now() < options.deadlineAt) {
+        await pingClassifier();
+        await runClassify({
+          limit: options.classifyLimit,
+          deadlineAt: options.deadlineAt,
+        });
+      } else {
+        log("Skipping classify: cloud time budget reached after collect");
+      }
       await runStatusAndMeta();
     }
 
@@ -55,15 +73,8 @@ export async function runDailyCheck(options: DailyCheckOptions = {}): Promise<Al
     return alert;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    await saveRunStatus({
-      status: "failed",
-      startedAt,
-      finishedAt: new Date().toISOString(),
-      error: message.slice(0, 400),
-      newMentionCount: null,
-      companiesAffected: null,
-      pid: process.pid,
-    });
+    const current: PipelineRun = runningState(startedAt, process.pid);
+    await saveRunStatus(failRun(current, message.slice(0, 400)));
     throw error;
   }
 }

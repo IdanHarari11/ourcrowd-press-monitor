@@ -14,7 +14,7 @@
     "pipeline": "tsx scripts/pipeline.ts",
     "alert": "tsx scripts/alert.ts",
     "audit:relevance": "tsx scripts/audit-relevance.ts",
-    "test": "tsx --test src/lib/companies.test.ts src/lib/status.test.ts src/lib/alerts.test.ts src/lib/classifier/parse.test.ts src/lib/desk-query.test.ts src/lib/relevance.test.ts"
+    "test": "tsx --test src/lib/companies.test.ts src/lib/status.test.ts src/lib/alerts.test.ts src/lib/classifier/parse.test.ts src/lib/desk-query.test.ts src/lib/relevance.test.ts src/lib/news/url.test.ts src/lib/news/targets.test.ts src/lib/run-phase.test.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.50",

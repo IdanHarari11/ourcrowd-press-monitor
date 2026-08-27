@@ -5,6 +5,7 @@ import { publicClassifierError } from "./parse";
 import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt";
 import { cloudApiKey, resolveClassifierModel, resolveOpenAIBaseURL } from "./provider";
 import { resultSchema, type Classification } from "./schema";
+import { config } from "../config";
 
 export async function pingOpenAI(): Promise<void> {
   if (!cloudApiKey()) {
@@ -17,6 +18,7 @@ export async function classifyWithOpenAI(
   aliases: string[],
   domain: string | undefined,
   mentions: Mention[],
+  timeoutMs = config.classifyTimeoutMs,
 ): Promise<Classification[]> {
   if (mentions.length === 0) return [];
 
@@ -39,7 +41,7 @@ export async function classifyWithOpenAI(
       system: SYSTEM_PROMPT,
       prompt: buildUserPrompt(companyName, aliases, domain, mentions),
       temperature: 0,
-      abortSignal: AbortSignal.timeout(45_000),
+      abortSignal: AbortSignal.timeout(timeoutMs),
     });
 
     if (!output) throw new Error("Cloud classifier returned empty output");

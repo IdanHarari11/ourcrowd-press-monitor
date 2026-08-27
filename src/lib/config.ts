@@ -31,4 +31,8 @@ export const config = {
   maxArticlesPerCompany: readInt("MAX_ARTICLES_PER_COMPANY", 5),
   collectConcurrency: readInt("COLLECT_CONCURRENCY", 5),
   classifyBatchSize: readInt("CLASSIFY_BATCH_SIZE", 3),
+  newsFetchTimeoutMs: readInt("NEWS_FETCH_TIMEOUT_MS", isVercelHost ? 8_000 : 20_000),
+  classifyTimeoutMs: readInt("CLASSIFY_TIMEOUT_MS", isVercelHost ? 15_000 : 45_000),
+  cloudCollectLimit: readInt("CLOUD_COLLECT_LIMIT", 6),
+  cloudClassifyLimit: readInt("CLOUD_CLASSIFY_LIMIT", 9),
 };

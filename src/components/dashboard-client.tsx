@@ -15,6 +15,14 @@ import { SystemStatus } from "@/components/system-status";
 import { filterDeskRows, paginateRows, type CoverageFilter, type SortKey } from "@/lib/desk-query";
 import { getLatestAlerts, getMentionsTimeline, getNewCoverage, getQuarterStats, getRecentMentions } from "@/lib/desk-stats";
 import { formatLastRun, lastRunFrom } from "@/lib/format";
+import {
+  CLIENT_DAILY_CHECK_TIMEOUT_MS,
+  LOCAL_POLL_GIVE_UP_MS,
+  STALE_RUNNING_MS,
+  failRun,
+  failedRun,
+  isRunStale,
+} from "@/lib/run-phase";
 import type { AlertPayload, Company, CompanyStatus, DailyCheckResponse, Mention, PipelineMeta, PipelineRun } from "@/lib/types";
 
 interface Props {
@@ -29,6 +37,28 @@ interface Props {
   pipelineAvailable: boolean;
   classifierLabel: string;
   model: string;
+}
+
+function httpErrorMessage(status: number): string {
+  if (status === 504 || status === 408 || status === 502 || status === 503) {
+    return "Daily check timed out on the host. Cloud checks only scan a limited batch; a full 258-company run must happen locally.";
+  }
+  if (status === 501) {
+    return "Daily check is not available on this host.";
+  }
+  return `Daily check failed (HTTP ${status}).`;
+}
+
+async function readDailyCheckResponse(response: Response): Promise<DailyCheckResponse> {
+  const text = await response.text();
+  if (!text.trim()) {
+    return { ...failedRun(httpErrorMessage(response.status)), persisted: false };
+  }
+  try {
+    return JSON.parse(text) as DailyCheckResponse;
+  } catch {
+    return { ...failedRun(httpErrorMessage(response.status)), persisted: false };
+  }
 }
 
 export function DashboardClient({
@@ -46,6 +76,9 @@ export function DashboardClient({
 }: Props) {
   const router = useRouter();
   const pollRef = useRef<number | null>(null);
+  const pollStartedAtRef = useRef<number | null>(null);
+  const inFlightRef = useRef(false);
+  const abortRef = useRef<AbortController | null>(null);
   const [query, setQuery] = useState("");
   const [coverage, setCoverage] = useState<CoverageFilter>("all");
   const [sortKey, setSortKey] = useState<SortKey>("recent");
@@ -105,6 +138,24 @@ export function DashboardClient({
 
   const closeDrawer = useCallback(() => setDrawerOpen(false), []);
 
+  const stopPolling = useCallback(() => {
+    if (pollRef.current !== null) {
+      window.clearInterval(pollRef.current);
+      pollRef.current = null;
+    }
+    pollStartedAtRef.current = null;
+  }, []);
+
+  const applyFailed = useCallback(
+    (message: string, startedAt?: string) => {
+      setRun(failedRun(message, startedAt));
+      setRunError(message);
+      stopPolling();
+      inFlightRef.current = false;
+    },
+    [stopPolling],
+  );
+
   const changeQuery = (value: string) => {
     setQuery(value);
     setPage(1);
@@ -121,65 +172,120 @@ export function DashboardClient({
   };
 
   const runDailyCheck = async () => {
+    if (inFlightRef.current || !pipelineAvailable) return;
+    inFlightRef.current = true;
     setRunError(null);
+    const startedAt = new Date().toISOString();
     setRun({
       status: "running",
-      startedAt: new Date().toISOString(),
+      startedAt,
       finishedAt: null,
       error: null,
       newMentionCount: null,
       companiesAffected: null,
       pid: null,
     });
-    const response = await fetch("/api/daily-check", { method: "POST" });
-    const payload = (await response.json()) as DailyCheckResponse;
-    if (!response.ok && response.status !== 409) {
+
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+    const timeoutId = window.setTimeout(() => controller.abort(), CLIENT_DAILY_CHECK_TIMEOUT_MS);
+
+    try {
+      const response = await fetch("/api/daily-check", { method: "POST", signal: controller.signal });
+      const payload = await readDailyCheckResponse(response);
+      if (!response.ok && response.status !== 409) {
+        applyFailed(payload.error ?? httpErrorMessage(response.status), startedAt);
+        return;
+      }
       setRun(payload);
-      setRunError(payload.error ?? "Daily check failed to start.");
-      return;
+      if (payload.dashboard) {
+        setDesk({
+          companies: payload.dashboard.companies,
+          statuses: payload.dashboard.statuses,
+          mentions: payload.dashboard.mentions,
+          meta: payload.dashboard.meta,
+          alert: payload.dashboard.alert,
+          snapshotIds: payload.dashboard.snapshotIds,
+        });
+      }
+      if (payload.status === "running") {
+        startPolling();
+        return;
+      }
+      if (payload.status === "failed") setRunError(payload.error);
+      if (payload.persisted !== false && !payload.dashboard) router.refresh();
+    } catch (error) {
+      const aborted = error instanceof DOMException && error.name === "AbortError";
+      applyFailed(
+        aborted
+          ? "Daily check timed out waiting for the server. The button will not stay Running; retry, or run the full pipeline locally."
+          : error instanceof Error
+            ? error.message
+            : "Daily check failed to start.",
+        startedAt,
+      );
+    } finally {
+      window.clearTimeout(timeoutId);
+      inFlightRef.current = false;
     }
-    setRun(payload);
-    if (payload.dashboard) {
-      setDesk({
-        companies: payload.dashboard.companies,
-        statuses: payload.dashboard.statuses,
-        mentions: payload.dashboard.mentions,
-        meta: payload.dashboard.meta,
-        alert: payload.dashboard.alert,
-        snapshotIds: payload.dashboard.snapshotIds,
-      });
-    }
-    if (payload.status === "running") {
-      startPolling();
-      return;
-    }
-    if (payload.status === "failed") setRunError(payload.error);
-    if (payload.persisted !== false && !payload.dashboard) router.refresh();
   };
 
   const startPolling = () => {
-    if (pollRef.current !== null) window.clearInterval(pollRef.current);
+    stopPolling();
+    pollStartedAtRef.current = Date.now();
     pollRef.current = window.setInterval(async () => {
-      const response = await fetch("/api/daily-check");
-      const next = (await response.json()) as PipelineRun | null;
-      if (!next) return;
-      setRun(next);
-      if (next.status !== "running") {
-        if (pollRef.current !== null) window.clearInterval(pollRef.current);
-        pollRef.current = null;
-        if (next.status === "failed") setRunError(next.error);
-        router.refresh();
+      if (pollStartedAtRef.current && Date.now() - pollStartedAtRef.current > LOCAL_POLL_GIVE_UP_MS) {
+        applyFailed("Daily check is taking too long. The local process may have stalled.");
+        return;
+      }
+      try {
+        const response = await fetch("/api/daily-check");
+        const next = (await response.json()) as PipelineRun | null;
+        if (!next) return;
+        setRun(next);
+        if (next.status !== "running") {
+          stopPolling();
+          if (next.status === "failed") setRunError(next.error);
+          router.refresh();
+        }
+      } catch {
+        // A single poll miss is not fatal; the give-up timer still ends Running.
       }
     }, 3000);
   };
 
   useEffect(() => {
-    if (pipelineAvailable && initialRun?.status === "running") startPolling();
+    if (pipelineAvailable && initialRun?.status === "running" && !isRunStale(initialRun)) {
+      startPolling();
+    } else if (initialRun?.status === "running") {
+      setRun(failRun(initialRun, "Daily check timed out or was interrupted before it finished."));
+      setRunError("Daily check timed out or was interrupted before it finished.");
+    }
     return () => {
-      if (pollRef.current !== null) window.clearInterval(pollRef.current);
+      stopPolling();
+      abortRef.current?.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- poll only on mount
   }, []);
+
+  useEffect(() => {
+    if (run?.status !== "running") return;
+    const started = Date.parse(run.startedAt);
+    const elapsed = Number.isFinite(started) ? Date.now() - started : STALE_RUNNING_MS;
+    const timer = window.setTimeout(() => {
+      setRun((current) =>
+        current?.status === "running"
+          ? failRun(current, "Daily check timed out or was interrupted before it finished.")
+          : current,
+      );
+      setRunError("Daily check timed out or was interrupted before it finished.");
+      stopPolling();
+      abortRef.current?.abort();
+      inFlightRef.current = false;
+    }, Math.max(250, STALE_RUNNING_MS - elapsed));
+    return () => window.clearTimeout(timer);
+  }, [run?.status, run?.startedAt, stopPolling]);
 
   const collectorOk = Boolean(desk.meta) && (desk.meta?.collectionErrors ?? 0) === 0;
 

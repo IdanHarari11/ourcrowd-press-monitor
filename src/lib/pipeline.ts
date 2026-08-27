@@ -2,12 +2,14 @@ import { applyRelevanceGate } from "./relevance";
 import { config } from "./config";
 import { ingestCompanies } from "./ingest";
 import { collectCompanyMentions, mapWithConcurrency } from "./news/collect";
+import { selectCompaniesForCollect } from "./news/targets";
 import { classifyMentionBatch, getClassifierModel, pingClassifier } from "./classifier";
 import { log } from "./cli";
 import { getQuarterWindow } from "./paths";
 import {
   loadCompanies,
   loadMentions,
+  loadStatuses,
   saveMentions,
   saveMeta,
   saveStatuses,
@@ -17,8 +19,11 @@ import type { Company, Mention, PipelineMeta } from "./types";
 
 export interface PipelineOptions {
   limit?: number;
+  preferStale?: boolean;
   skipCollect?: boolean;
   skipClassify?: boolean;
+  deadlineAt?: number;
+  concurrency?: number;
 }
 
 export async function runIngest(): Promise<Company[]> {
@@ -29,29 +34,41 @@ export async function runIngest(): Promise<Company[]> {
 
 export async function runCollect(options: PipelineOptions = {}): Promise<{ mentions: Mention[]; errors: number }> {
   const companies = await loadCompanies();
-  const selected = options.limit ? companies.slice(0, options.limit) : companies;
+  const statuses = await loadStatuses();
+  const selected = selectCompaniesForCollect(companies, statuses, {
+    limit: options.limit,
+    preferStale: options.preferStale,
+  });
   const existing = await loadMentions();
   const existingById = new Map(existing.map((mention) => [mention.id, mention]));
   let errors = 0;
   let collected = 0;
+  const concurrency = options.concurrency ?? config.collectConcurrency;
+  const pastDeadline = () => Boolean(options.deadlineAt && Date.now() >= options.deadlineAt);
 
   log(`Collecting news for ${selected.length} companies (max ${config.maxArticlesPerCompany} each)`);
 
-  await mapWithConcurrency(selected, config.collectConcurrency, async (company, index) => {
-    const result = await collectCompanyMentions(company);
-    if (result.error) {
-      errors += 1;
-      log(`  ! ${company.name}: ${result.error}`);
-    }
-    collected += result.mentions.length;
-    for (const mention of result.mentions) {
-      const previous = existingById.get(mention.id);
-      existingById.set(mention.id, previous ? { ...mention, ...pickClassification(previous) } : mention);
-    }
-    if ((index + 1) % 25 === 0 || index === selected.length - 1) {
-      log(`  collected ${index + 1}/${selected.length} companies (${collected} articles so far)`);
-    }
-  });
+  await mapWithConcurrency(
+    selected,
+    concurrency,
+    async (company, index) => {
+      if (pastDeadline()) return;
+      const result = await collectCompanyMentions(company);
+      if (result.error) {
+        errors += 1;
+        log(`  ! ${company.name}: ${result.error}`);
+      }
+      collected += result.mentions.length;
+      for (const mention of result.mentions) {
+        const previous = existingById.get(mention.id);
+        existingById.set(mention.id, previous ? { ...mention, ...pickClassification(previous) } : mention);
+      }
+      if ((index + 1) % 25 === 0 || index === selected.length - 1) {
+        log(`  collected ${index + 1}/${selected.length} companies (${collected} articles so far)`);
+      }
+    },
+    pastDeadline,
+  );
 
   const { start } = getQuarterWindow();
   const merged = [...existingById.values()].filter((mention) => {
@@ -81,13 +98,19 @@ export async function runClassify(options: PipelineOptions = {}): Promise<Mentio
   log(`Classifying ${limited.length} mentions with ${model}`);
   const byCompany = groupBy(limited, (mention) => mention.companyId);
   let done = 0;
+  const pastDeadline = () => Boolean(options.deadlineAt && Date.now() >= options.deadlineAt);
 
   for (const [companyId, companyMentions] of byCompany) {
+    if (pastDeadline()) {
+      log("Stopping classification: cloud time budget reached");
+      break;
+    }
     const company = companyById.get(companyId);
     if (!company) continue;
     const batches = chunk(companyMentions, config.classifyBatchSize);
 
     for (const batch of batches) {
+      if (pastDeadline()) break;
       try {
         const results = await classifyMentionBatch(company.name, company.aliases, company.domain, batch);
         const byId = new Map(results.map((item) => [item.id, item]));

@@ -6,11 +6,12 @@ import { getQuarterWindow } from "../paths";
 import { mentionId } from "../storage";
 import { assessLexicalRelevance } from "../relevance";
 import type { Company, Mention } from "../types";
+import { normalizeArticleUrl, parseHttpUrl } from "./url";
 
 const USER_AGENT = "OurCrowdPressMonitor/1.0 (portfolio news monitoring take-home)";
 
 const rssParser = new Parser({
-  timeout: 20_000,
+  timeout: config.newsFetchTimeoutMs,
   headers: { "User-Agent": USER_AGENT, Accept: "application/rss+xml, application/xml, text/xml" },
 });
 
@@ -88,10 +89,29 @@ function toMention(company: Company, item: CollectedItem, collectedAt: string): 
   };
 }
 
+/**
+ * Fetch RSS over HTTP ourselves. rss-parser.parseURL() still calls Node's
+ * deprecated url.parse() (DEP0169), which Vercel log drains label as [error].
+ */
+async function parseRssFeed(feedUrl: string) {
+  const parsedUrl = parseHttpUrl(feedUrl);
+  if (!parsedUrl) return { items: [] as [] };
+
+  const response = await fetch(parsedUrl, {
+    headers: { "User-Agent": USER_AGENT, Accept: "application/rss+xml, application/xml, text/xml" },
+    signal: AbortSignal.timeout(config.newsFetchTimeoutMs),
+    redirect: "follow",
+  });
+  if (!response.ok) return { items: [] as [] };
+  const xml = await response.text();
+  if (!xml.trim()) return { items: [] as [] };
+  return rssParser.parseString(xml);
+}
+
 async function fetchGoogleNews(query: string): Promise<CollectedItem[]> {
   const url = `https://news.google.com/rss/search?q=${encodeURIComponent(`${query} when:90d`)}&hl=en-US&gl=US&ceid=US:en`;
   try {
-    const feed = await rssParser.parseURL(url);
+    const feed = await parseRssFeed(url);
 
     return (feed.items ?? [])
       .map((item) => {
@@ -129,9 +149,11 @@ async function fetchGdelt(query: string, companyName: string): Promise<Collected
   const url = `https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(query)}&mode=artlist&maxrecords=20&timespan=3m&sort=datedesc&format=json`;
 
   try {
-    const response = await fetch(url, {
+    const parsedUrl = parseHttpUrl(url);
+    if (!parsedUrl) return [];
+    const response = await fetch(parsedUrl, {
       headers: { "User-Agent": USER_AGENT, Accept: "application/json" },
-      signal: AbortSignal.timeout(20_000),
+      signal: AbortSignal.timeout(config.newsFetchTimeoutMs),
     });
     if (!response.ok) return [];
     const payload = (await response.json()) as { articles?: GdeltArticle[] };
@@ -185,22 +207,11 @@ function firstToken(name: string): string {
   return name.split(/\s+/)[0] ?? name;
 }
 
-function normalizeUrl(url: string): string {
-  try {
-    const parsed = new URL(url);
-    parsed.hash = "";
-    parsed.search = "";
-    return parsed.toString().replace(/\/$/, "").toLowerCase();
-  } catch {
-    return url.toLowerCase();
-  }
-}
-
 function dedupeItems(items: CollectedItem[]): CollectedItem[] {
   const seen = new Set<string>();
   const result: CollectedItem[] = [];
   for (const item of items) {
-    const key = `${normalizeUrl(item.url)}|${item.title.toLowerCase()}`;
+    const key = `${normalizeArticleUrl(item.url)}|${item.title.toLowerCase()}`;
     if (seen.has(key)) continue;
     seen.add(key);
     result.push(item);
@@ -212,12 +223,14 @@ export async function mapWithConcurrency<T, R>(
   items: T[],
   concurrency: number,
   worker: (item: T, index: number) => Promise<R>,
+  shouldStop?: () => boolean,
 ): Promise<R[]> {
   const results: R[] = new Array(items.length);
   let nextIndex = 0;
 
   async function run(): Promise<void> {
     while (nextIndex < items.length) {
+      if (shouldStop?.()) return;
       const current = nextIndex;
       nextIndex += 1;
       results[current] = await worker(items[current], current);
