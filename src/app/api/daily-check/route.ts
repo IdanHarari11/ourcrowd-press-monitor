@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
-import { startDailyCheckProcess } from "@/lib/daily-check";
-import { LOCAL_PIPELINE_MESSAGE, isHostedReadOnly } from "@/lib/runtime";
+import { runDailyCheck, startDailyCheckProcess } from "@/lib/daily-check";
+import { loadDashboardData } from "@/lib/dashboard";
+import { LOCAL_PIPELINE_MESSAGE, canRunPipeline, isVercelHost } from "@/lib/runtime";
 import { resolveRunStatus } from "@/lib/run-status";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 300;
 
 export async function GET() {
   const run = await resolveRunStatus();
@@ -12,7 +14,7 @@ export async function GET() {
 }
 
 export async function POST() {
-  if (isHostedReadOnly) {
+  if (!canRunPipeline()) {
     return NextResponse.json(
       {
         status: "failed",
@@ -22,6 +24,7 @@ export async function POST() {
         newMentionCount: null,
         companiesAffected: null,
         pid: null,
+        persisted: false,
       },
       { status: 501 },
     );
@@ -32,6 +35,44 @@ export async function POST() {
     return NextResponse.json(current, { status: 409 });
   }
 
+  if (isVercelHost) {
+    try {
+      await runDailyCheck({ skipIngest: true });
+      const [run, dashboard] = await Promise.all([resolveRunStatus(), loadDashboardData()]);
+      return NextResponse.json({
+        ...(run ?? {
+          status: "success",
+          startedAt: new Date().toISOString(),
+          finishedAt: new Date().toISOString(),
+          error: null,
+          newMentionCount: null,
+          companiesAffected: null,
+          pid: process.pid,
+        }),
+        dashboard,
+        persisted: false,
+      });
+    } catch (error) {
+      const run = await resolveRunStatus();
+      const message = error instanceof Error ? error.message : "Daily check failed";
+      return NextResponse.json(
+        {
+          ...(run ?? {
+            status: "failed",
+            startedAt: new Date().toISOString(),
+            finishedAt: new Date().toISOString(),
+            error: message.slice(0, 400),
+            newMentionCount: null,
+            companiesAffected: null,
+            pid: process.pid,
+          }),
+          persisted: false,
+        },
+        { status: 500 },
+      );
+    }
+  }
+
   const run = await startDailyCheckProcess();
-  return NextResponse.json(run, { status: 202 });
+  return NextResponse.json({ ...run, persisted: true }, { status: 202 });
 }

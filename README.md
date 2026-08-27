@@ -18,7 +18,7 @@ data/source/ourcrowd_companies.txt   seed list (source of truth)
         ▼
  scripts/pipeline.ts
         ├── collect   Google News RSS + GDELT (Node.js)
-        ├── classify  local Ollama (/api/chat, JSON schema)
+        ├── classify  Ollama (default) or optional OpenAI-compatible API
         └── status    last-mentioned + quarter counts
         │
         ▼
@@ -35,7 +35,7 @@ All backend and collection code is JavaScript/TypeScript on Node.js, as required
 | Path | Role |
 |------|------|
 | `src/lib/news/collect.ts` | News collection (Google News RSS + GDELT fallback) |
-| `src/lib/classifier/ollama.ts` | Local LLM classification |
+| `src/lib/classifier/` | Sentiment + relevance (Ollama default, optional cloud API) |
 | `src/lib/status.ts` | Last-mentioned status |
 | `src/lib/alerts.ts` | Daily delta + notification |
 | `src/app/` | Dashboard UI (App Router) |
@@ -85,6 +85,36 @@ cp .env.example .env
 npm install
 ```
 
+## Environment variables
+
+Copy `.env.example` to `.env` locally. **Never commit `.env`.** Secrets belong in `.env` (gitignored) or the Vercel dashboard.
+
+| Variable | Purpose | Local (assignment) | Vercel production |
+| --- | --- | --- | --- |
+| `OLLAMA_HOST` | Local Ollama HTTP API | `http://127.0.0.1:11434` | unused (no Ollama on Vercel) |
+| `OLLAMA_MODEL` | Local model id | `llama3.2:3b` | unused |
+| `CLASSIFIER_PROVIDER` | `ollama` \| `openai` \| `ai-gateway` | leave empty → Ollama | leave empty; auto-cloud only if a key is set |
+| `OPENAI_API_KEY` | OpenAI-compatible API key | optional | **required** to enable live Daily Check |
+| `AI_GATEWAY_API_KEY` | Vercel AI Gateway key (alternative to OpenAI) | optional | alternative to `OPENAI_API_KEY` |
+| `OPENAI_BASE_URL` | Compatible endpoint (Groq, Azure, gateway, …) | optional | optional |
+| `CLASSIFIER_MODEL` | Cloud model id | optional (`gpt-4.1-mini`) | optional |
+| `ALERT_WEBHOOK_URL` | Slack/webhook for daily alerts | optional | optional |
+| `MAX_ARTICLES_PER_COMPANY` | Cap per company | `5` | same default in code |
+| `COLLECT_CONCURRENCY` | Parallel news fetches | `5` | same default in code |
+| `CLASSIFY_BATCH_SIZE` | Mentions per LLM call | `3` | same default in code |
+
+The take-home **must** classify via local Ollama. The cloud path is optional production wiring: same JSON schema (`relevant` + `sentiment`), same prompts. Do not set `CLASSIFIER_PROVIDER=ollama` on Vercel — there is no local model there. Without a cloud key, the hosted dashboard stays an honest read-only snapshot (Daily Check returns 501, never a fake Success).
+
+### Enable live Daily Check on Vercel
+
+In the Vercel project → Settings → Environment Variables (Production + Preview):
+
+1. Add `OPENAI_API_KEY` **or** `AI_GATEWAY_API_KEY` (a real key — never a placeholder).
+2. Optionally set `CLASSIFIER_PROVIDER=openai` (or `ai-gateway`) and `CLASSIFIER_MODEL`.
+3. Redeploy.
+
+Live runs on Vercel cannot write `data/*.json` (read-only filesystem). Results are shown in that request/session; durable updates still come from a local/CI pipeline that commits JSON.
+
 ## Run end-to-end (local)
 
 ```bash
@@ -125,7 +155,7 @@ npm test                          # unit tests (no network, no Ollama)
 
 **Endpoint:** `POST {OLLAMA_HOST}/api/chat` with `stream: false`, `temperature: 0`, and a JSON Schema `format` so the model returns structured output.
 
-**System prompt** (see `src/lib/classifier/ollama.ts`):
+**System prompt** (see `src/lib/classifier/prompt.ts`):
 
 - Decide `relevant` (is this article about *this* company, not a namesake?).
 - Assign `sentiment`: `positive` | `negative` | `neutral`.
@@ -157,10 +187,10 @@ After `npm run pipeline` (and optionally `npm run alert -- --skip-fetch`):
 
 This repo already includes a successful 2026-08-27 run:
 
-- 258 companies tracked  
-- 813 collected mentions, 813 classified with `llama3.2:3b`  
-- 693 relevant / 120 filtered as namesakes or unrelated  
-- 196 companies with coverage this quarter, 62 with no coverage found
+- 258 companies tracked (same names as the provided `ourcrowd_companies.txt`)
+- 911 collected mentions, 911 classified (`llama3.2:3b` plus a lexical namesake gate)
+- 403 relevant / 508 filtered as namesakes or unrelated
+- 125 companies with coverage this quarter, 133 with no coverage found
 
 | File | Contents |
 |------|----------|
@@ -180,7 +210,7 @@ This repo already includes a successful 2026-08-27 run:
 - **Cap:** `MAX_ARTICLES_PER_COMPANY` (default 5) keeps classification tractable. High-profile names (Stripe, SpaceX, Anthropic) will have more coverage than we store.
 - **Quarter** = rolling last 90 days, not a calendar quarter.
 - **Sentiment** is headline/snippet level, not full-article reading. RSS snippets are short.
-- **No auth, no multi-user, no production scheduler service.** Cron (or running `npm run alert` by hand) is the job runner.
+- **No auth, no multi-user.** The assignment daily job is cron / `npm run alert` / the dashboard button on a local machine with Ollama. Vercel is a read-only snapshot unless a cloud classifier key is configured (see Environment variables).
 - Company list contains **names only** (plus occasional “formerly …” / domain). No official sector/domain map was provided.
 
 ## Tests
@@ -193,4 +223,4 @@ Covers company parsing, status labels, alert diffs, and JSON extraction from LLM
 
 ## UI notes
 
-Dark analytics desk (Inter + IBM Plex Mono). Overview shows quarterly KPIs, a stacked sentiment timeline, coverage status for every company (paginated), recent mentions, and the latest daily-check alert. Company rows open a details drawer with source URLs. `Run Daily Check` starts the existing `npm run alert` job (collect + classify + alert) via `POST /api/daily-check`. Empty, loading, and error states are implemented. There is no export — the assignment does not produce one.
+Dark analytics desk (Inter + IBM Plex Mono). Overview shows quarterly KPIs, a stacked sentiment timeline, coverage status for every company (paginated), recent mentions, and the latest daily-check alert. Company rows open a details drawer with source URLs. `Run Daily Check` starts collect + classify + alert via `POST /api/daily-check` (local spawn of `npm run alert`; on Vercel, in-process only when a cloud API key is set). Empty, loading, and error states are implemented. There is no export — the assignment does not produce one.

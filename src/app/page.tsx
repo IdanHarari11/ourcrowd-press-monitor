@@ -1,19 +1,18 @@
 import { DashboardClient } from "@/components/dashboard-client";
 import { AppShell, SimpleHeader } from "@/components/app-shell";
-import { isOllamaReachable } from "@/lib/classifier/ollama";
-import { config } from "@/lib/config";
+import { classifierLabel, getClassifierModel, isClassifierReady } from "@/lib/classifier";
 import { loadDashboardData } from "@/lib/dashboard";
-import { isHostedReadOnly } from "@/lib/runtime";
+import { canRunPipeline, isHostedReadOnly } from "@/lib/runtime";
 import { resolveRunStatus } from "@/lib/run-status";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const pipelineAvailable = !isHostedReadOnly;
-  const skipOllamaProbe = !pipelineAvailable || process.env.NEXT_PHASE === "phase-production-build";
-  const [data, ollamaOk, initialRun] = await Promise.all([
+  const pipelineAvailable = canRunPipeline();
+  const skipClassifierProbe = isHostedReadOnly || process.env.NEXT_PHASE === "phase-production-build";
+  const [data, classifierReady, initialRun] = await Promise.all([
     loadDashboardData(),
-    skipOllamaProbe ? Promise.resolve(false) : isOllamaReachable(),
+    skipClassifierProbe ? Promise.resolve(false) : isClassifierReady(),
     resolveRunStatus(),
   ]);
 
@@ -30,9 +29,10 @@ export default async function HomePage() {
       alert={data.alert}
       snapshotIds={data.snapshotIds}
       initialRun={initialRun}
-      ollamaOk={ollamaOk}
+      classifierReady={classifierReady}
       pipelineAvailable={pipelineAvailable}
-      model={data.meta?.model || config.ollamaModel}
+      classifierLabel={classifierLabel()}
+      model={data.meta?.model || getClassifierModel()}
     />
   );
 }

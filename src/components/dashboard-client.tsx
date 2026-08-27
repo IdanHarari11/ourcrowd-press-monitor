@@ -15,7 +15,7 @@ import { SystemStatus } from "@/components/system-status";
 import { filterDeskRows, paginateRows, type CoverageFilter, type SortKey } from "@/lib/desk-query";
 import { getLatestAlerts, getMentionsTimeline, getNewCoverage, getQuarterStats, getRecentMentions } from "@/lib/desk-stats";
 import { formatLastRun, lastRunFrom } from "@/lib/format";
-import type { AlertPayload, Company, CompanyStatus, Mention, PipelineMeta, PipelineRun } from "@/lib/types";
+import type { AlertPayload, Company, CompanyStatus, DailyCheckResponse, Mention, PipelineMeta, PipelineRun } from "@/lib/types";
 
 interface Props {
   companies: Company[];
@@ -25,8 +25,9 @@ interface Props {
   alert: AlertPayload | null;
   snapshotIds: string[];
   initialRun: PipelineRun | null;
-  ollamaOk: boolean;
+  classifierReady: boolean;
   pipelineAvailable: boolean;
+  classifierLabel: string;
   model: string;
 }
 
@@ -38,8 +39,9 @@ export function DashboardClient({
   alert,
   snapshotIds,
   initialRun,
-  ollamaOk,
+  classifierReady,
   pipelineAvailable,
+  classifierLabel,
   model,
 }: Props) {
   const router = useRouter();
@@ -51,32 +53,49 @@ export function DashboardClient({
   const [granularity, setGranularity] = useState<"day" | "week">("week");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [desk, setDesk] = useState({ companies, statuses, mentions, meta, alert, snapshotIds });
   const [run, setRun] = useState<PipelineRun | null>(initialRun);
   const [runError, setRunError] = useState<string | null>(null);
 
-  const statusById = useMemo(() => new Map(statuses.map((item) => [item.companyId, item])), [statuses]);
+  useEffect(() => {
+    setDesk({ companies, statuses, mentions, meta, alert, snapshotIds });
+  }, [alert, companies, mentions, meta, snapshotIds, statuses]);
+
+  const statusById = useMemo(
+    () => new Map(desk.statuses.map((item) => [item.companyId, item])),
+    [desk.statuses],
+  );
   const rows = useMemo(
-    () => filterDeskRows(companies, statusById, query, coverage, sortKey),
-    [companies, coverage, query, sortKey, statusById],
+    () => filterDeskRows(desk.companies, statusById, query, coverage, sortKey),
+    [coverage, desk.companies, query, sortKey, statusById],
   );
   const paged = useMemo(() => paginateRows(rows, page), [page, rows]);
-  const newMentions = useMemo(() => getNewCoverage(mentions, snapshotIds), [mentions, snapshotIds]);
-  const stats = useMemo(
-    () => getQuarterStats(companies, statuses, newMentions, alert?.generatedAt ?? meta?.generatedAt ?? null),
-    [alert?.generatedAt, companies, meta?.generatedAt, newMentions, statuses],
+  const newMentions = useMemo(
+    () => getNewCoverage(desk.mentions, desk.snapshotIds),
+    [desk.mentions, desk.snapshotIds],
   );
-  const recent = useMemo(() => getRecentMentions(mentions), [mentions]);
+  const stats = useMemo(
+    () =>
+      getQuarterStats(
+        desk.companies,
+        desk.statuses,
+        newMentions,
+        desk.alert?.generatedAt ?? desk.meta?.generatedAt ?? null,
+      ),
+    [desk.alert?.generatedAt, desk.companies, desk.meta?.generatedAt, desk.statuses, newMentions],
+  );
+  const recent = useMemo(() => getRecentMentions(desk.mentions), [desk.mentions]);
   const alerts = useMemo(
-    () => getLatestAlerts(newMentions, alert?.generatedAt ?? meta?.generatedAt ?? null),
-    [alert?.generatedAt, meta?.generatedAt, newMentions],
+    () => getLatestAlerts(newMentions, desk.alert?.generatedAt ?? desk.meta?.generatedAt ?? null),
+    [desk.alert?.generatedAt, desk.meta?.generatedAt, newMentions],
   );
   const timeline = useMemo(() => {
-    if (!meta) return [];
-    return getMentionsTimeline(mentions, meta.quarterStart, meta.quarterEnd, granularity);
-  }, [granularity, mentions, meta]);
+    if (!desk.meta) return [];
+    return getMentionsTimeline(desk.mentions, desk.meta.quarterStart, desk.meta.quarterEnd, granularity);
+  }, [desk.mentions, desk.meta, granularity]);
 
-  const derived = lastRunFrom(meta, run);
-  const selectedCompany = selectedId ? (companies.find((item) => item.id === selectedId) ?? null) : null;
+  const derived = lastRunFrom(desk.meta, run);
+  const selectedCompany = selectedId ? (desk.companies.find((item) => item.id === selectedId) ?? null) : null;
   const selectedStatus = selectedId ? (statusById.get(selectedId) ?? null) : null;
 
   const openCompany = useCallback((companyId: string) => {
@@ -103,14 +122,39 @@ export function DashboardClient({
 
   const runDailyCheck = async () => {
     setRunError(null);
+    setRun({
+      status: "running",
+      startedAt: new Date().toISOString(),
+      finishedAt: null,
+      error: null,
+      newMentionCount: null,
+      companiesAffected: null,
+      pid: null,
+    });
     const response = await fetch("/api/daily-check", { method: "POST" });
-    const payload = (await response.json()) as PipelineRun & { error?: string };
+    const payload = (await response.json()) as DailyCheckResponse;
     if (!response.ok && response.status !== 409) {
+      setRun(payload);
       setRunError(payload.error ?? "Daily check failed to start.");
       return;
     }
     setRun(payload);
-    startPolling();
+    if (payload.dashboard) {
+      setDesk({
+        companies: payload.dashboard.companies,
+        statuses: payload.dashboard.statuses,
+        mentions: payload.dashboard.mentions,
+        meta: payload.dashboard.meta,
+        alert: payload.dashboard.alert,
+        snapshotIds: payload.dashboard.snapshotIds,
+      });
+    }
+    if (payload.status === "running") {
+      startPolling();
+      return;
+    }
+    if (payload.status === "failed") setRunError(payload.error);
+    if (payload.persisted !== false && !payload.dashboard) router.refresh();
   };
 
   const startPolling = () => {
@@ -137,14 +181,14 @@ export function DashboardClient({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- poll only on mount
   }, []);
 
-  const collectorOk = Boolean(meta) && (meta?.collectionErrors ?? 0) === 0;
+  const collectorOk = Boolean(desk.meta) && (desk.meta?.collectionErrors ?? 0) === 0;
 
   return (
     <AppShell
       fillViewport
       header={
         <DashboardHeader
-          meta={meta}
+          meta={desk.meta}
           run={run}
           derivedStatus={derived.status}
           derivedAt={derived.at}
@@ -154,11 +198,12 @@ export function DashboardClient({
       }
       footer={
         <SystemStatus
-          lastUpdate={formatLastRun(meta?.generatedAt ?? null)}
+          lastUpdate={formatLastRun(desk.meta?.generatedAt ?? null)}
           collectorOk={collectorOk}
-          ollamaOk={ollamaOk}
+          classifierReady={classifierReady}
           pipelineAvailable={pipelineAvailable}
-          model={model}
+          classifierLabel={classifierLabel}
+          model={desk.meta?.model || model}
         />
       }
     >
@@ -189,7 +234,7 @@ export function DashboardClient({
             onCoverageChange={changeCoverage}
             onSortChange={changeSort}
             shown={paged.total}
-            total={companies.length}
+            total={desk.companies.length}
           />
           <CoverageTable
             rows={paged.slice}
@@ -209,7 +254,7 @@ export function DashboardClient({
         <CompanyDetailsDrawer
           company={selectedCompany}
           status={selectedStatus}
-          mentions={mentions}
+          mentions={desk.mentions}
           open={drawerOpen}
           onClose={closeDrawer}
         />

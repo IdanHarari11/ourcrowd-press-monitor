@@ -51,7 +51,11 @@ export function DashboardHeader({
           onClick={onRunCheck}
           disabled={checkDisabled}
           aria-busy={running}
-          title={pipelineAvailable ? undefined : "Available only on a local machine with Ollama"}
+          title={
+            pipelineAvailable
+              ? undefined
+              : "Requires local Ollama, or OPENAI_API_KEY / AI_GATEWAY_API_KEY on this host"
+          }
         >
           {running ? "Running…" : !pipelineAvailable ? "Local only" : derivedStatus === "failed" ? "Retry Daily Check" : "Run Daily Check"}
         </button>

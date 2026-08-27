@@ -1,7 +1,7 @@
 import { spawn } from "node:child_process";
 import { config } from "./config";
 import { log } from "./cli";
-import { pingOllama } from "./classifier/ollama";
+import { pingClassifier } from "./classifier";
 import { buildAlert, diffNewMentions, notifyAlert } from "./alerts";
 import { runCollect, runClassify, runIngest, runStatusAndMeta } from "./pipeline";
 import { loadMentions, loadSnapshotIds, saveAlert, saveRunStatus, saveSnapshotIds } from "./storage";
@@ -9,6 +9,7 @@ import type { AlertPayload, PipelineRun } from "./types";
 
 export interface DailyCheckOptions {
   skipFetch?: boolean;
+  skipIngest?: boolean;
 }
 
 export async function runDailyCheck(options: DailyCheckOptions = {}): Promise<AlertPayload> {
@@ -17,9 +18,11 @@ export async function runDailyCheck(options: DailyCheckOptions = {}): Promise<Al
 
   try {
     if (!options.skipFetch) {
-      await runIngest();
+      if (!options.skipIngest) {
+        await runIngest();
+      }
       await runCollect();
-      await pingOllama();
+      await pingClassifier();
       await runClassify();
       await runStatusAndMeta();
     }

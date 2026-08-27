@@ -1,6 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { diffNewMentions, getNewCoverage } from "./coverage-diff";
+import { isVercelHost } from "./runtime";
 import type { AlertPayload, Mention, Sentiment } from "./types";
 
 export { diffNewMentions, getNewCoverage };
@@ -55,12 +56,14 @@ export async function notifyAlert(alert: AlertPayload, webhookUrl?: string): Pro
   const banner = "=== OurCrowd daily press alert ===";
   process.stdout.write(`\n${banner}\n${alert.summary}\n${banner}\n\n`);
 
-  await mkdir(path.join(process.cwd(), "data", "alerts"), { recursive: true });
-  await writeFile(
-    path.join(process.cwd(), "data", "alerts", "latest.txt"),
-    `${banner}\n${alert.summary}\n${banner}\n`,
-    "utf8",
-  );
+  if (!isVercelHost) {
+    await mkdir(path.join(process.cwd(), "data", "alerts"), { recursive: true });
+    await writeFile(
+      path.join(process.cwd(), "data", "alerts", "latest.txt"),
+      `${banner}\n${alert.summary}\n${banner}\n`,
+      "utf8",
+    );
+  }
 
   if (!webhookUrl) return;
 

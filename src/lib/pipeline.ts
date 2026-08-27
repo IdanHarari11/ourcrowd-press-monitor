@@ -2,7 +2,7 @@ import { applyRelevanceGate } from "./relevance";
 import { config } from "./config";
 import { ingestCompanies } from "./ingest";
 import { collectCompanyMentions, mapWithConcurrency } from "./news/collect";
-import { classifyMentionBatch, pingOllama } from "./classifier/ollama";
+import { classifyMentionBatch, getClassifierModel, pingClassifier } from "./classifier";
 import { log } from "./cli";
 import { getQuarterWindow } from "./paths";
 import {
@@ -65,7 +65,8 @@ export async function runCollect(options: PipelineOptions = {}): Promise<{ menti
 }
 
 export async function runClassify(options: PipelineOptions = {}): Promise<Mention[]> {
-  await pingOllama();
+  await pingClassifier();
+  const model = getClassifierModel();
   const companies = await loadCompanies();
   const companyById = new Map(companies.map((company) => [company.id, company]));
   const mentions = await loadMentions();
@@ -77,7 +78,7 @@ export async function runClassify(options: PipelineOptions = {}): Promise<Mentio
     return mentions;
   }
 
-  log(`Classifying ${limited.length} mentions with ${config.ollamaModel}`);
+  log(`Classifying ${limited.length} mentions with ${model}`);
   const byCompany = groupBy(limited, (mention) => mention.companyId);
   let done = 0;
 
@@ -93,7 +94,7 @@ export async function runClassify(options: PipelineOptions = {}): Promise<Mentio
         for (const mention of batch) {
           const classified = byId.get(mention.id);
           mention.classifiedAt = new Date().toISOString();
-          mention.model = config.ollamaModel;
+          mention.model = model;
           if (classified) {
             const gated = applyRelevanceGate(company, {
               title: mention.title,
@@ -116,7 +117,7 @@ export async function runClassify(options: PipelineOptions = {}): Promise<Mentio
         log(`  ! ${company.name} batch failed: ${message}`);
         for (const mention of batch) {
           mention.classifiedAt = new Date().toISOString();
-          mention.model = config.ollamaModel;
+          mention.model = model;
           mention.relevant = false;
           mention.sentiment = "neutral";
           mention.rationale = `Classification error: ${message.slice(0, 180)}`;
@@ -145,7 +146,7 @@ export async function runStatusAndMeta(collectionErrors = 0): Promise<PipelineMe
     generatedAt: new Date().toISOString(),
     quarterStart: start.toISOString(),
     quarterEnd: end.toISOString(),
-    model: config.ollamaModel,
+    model: getClassifierModel(),
     companiesTracked: companies.length,
     mentionsCollected: mentions.length,
     mentionsClassified: mentions.filter((mention) => mention.classifiedAt).length,

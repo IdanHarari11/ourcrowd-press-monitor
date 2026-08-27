@@ -1,7 +1,8 @@
 import { existsSync } from "node:fs";
-import { isHostedReadOnly } from "./runtime";
+import { resolveClassifierModel, resolveClassifierProvider, resolveOpenAIBaseURL } from "./classifier/provider";
+import { isVercelHost } from "./runtime";
 
-if (!isHostedReadOnly) {
+if (!isVercelHost) {
   if (existsSync(".env")) {
     process.loadEnvFile(".env");
   } else if (existsSync(".env.example")) {
@@ -23,6 +24,9 @@ function readInt(name: string, fallback: number): number {
 export const config = {
   ollamaHost: readEnv("OLLAMA_HOST", "http://127.0.0.1:11434"),
   ollamaModel: readEnv("OLLAMA_MODEL", "llama3.2:3b"),
+  classifierProvider: resolveClassifierProvider(),
+  classifierModel: resolveClassifierModel(),
+  openaiBaseUrl: resolveOpenAIBaseURL() ?? "",
   alertWebhookUrl: process.env.ALERT_WEBHOOK_URL?.trim() || "",
   maxArticlesPerCompany: readInt("MAX_ARTICLES_PER_COMPANY", 5),
   collectConcurrency: readInt("COLLECT_CONCURRENCY", 5),

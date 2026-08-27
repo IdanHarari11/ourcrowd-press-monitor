@@ -1,12 +1,26 @@
 interface SystemStatusProps {
   lastUpdate: string;
   collectorOk: boolean;
-  ollamaOk: boolean;
+  classifierReady: boolean;
   pipelineAvailable: boolean;
+  classifierLabel: string;
   model: string;
 }
 
-export function SystemStatus({ lastUpdate, collectorOk, ollamaOk, pipelineAvailable, model }: SystemStatusProps) {
+export function SystemStatus({
+  lastUpdate,
+  collectorOk,
+  classifierReady,
+  pipelineAvailable,
+  classifierLabel,
+  model,
+}: SystemStatusProps) {
+  const classifierState = pipelineAvailable
+    ? classifierReady
+      ? "operational"
+      : "unreachable"
+    : "local only";
+
   return (
     <footer className="desk-footer">
       <p>
@@ -14,14 +28,14 @@ export function SystemStatus({ lastUpdate, collectorOk, ollamaOk, pipelineAvaila
         {" · "}
         Collector {collectorOk ? "operational" : "degraded"}
         {" · "}
-        Ollama {pipelineAvailable ? (ollamaOk ? "operational" : "unreachable") : "local only"}
+        Classifier {classifierState}
         {" · "}
-        Sentiment: Ollama · {model}
+        Snapshot: {model}
       </p>
       <p>
         {pipelineAvailable
-          ? `Sentiment classification powered locally by Ollama · ${model}`
-          : "Hosted demo is read-only. Run Daily Check and classify with Ollama on your local machine."}
+          ? `Live classification: ${classifierLabel}. Assignment demo uses local Ollama by default.`
+          : "Hosted demo is read-only. Run Daily Check locally with Ollama, or set OPENAI_API_KEY / AI_GATEWAY_API_KEY on Vercel for live cloud classification."}
       </p>
     </footer>
   );

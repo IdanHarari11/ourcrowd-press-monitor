@@ -1,14 +1,14 @@
 import { parseArgs } from "../src/lib/cli";
 import { log } from "../src/lib/cli";
-import { pingOllama } from "../src/lib/classifier/ollama";
+import { pingClassifier } from "../src/lib/classifier";
 import { runClassify, runStatusAndMeta } from "../src/lib/pipeline";
 
 async function main(): Promise<void> {
   const args = parseArgs();
   const limit = typeof args.limit === "string" ? Number.parseInt(args.limit, 10) : undefined;
 
-  await pingOllama();
-  log("Ollama is reachable");
+  await pingClassifier();
+  log("Classifier is ready");
   await runClassify({ limit: Number.isFinite(limit) ? limit : undefined });
   await runStatusAndMeta();
 }

@@ -88,3 +88,8 @@ export interface DashboardData {
   snapshotIds: string[];
   alert: AlertPayload | null;
 }
+
+export interface DailyCheckResponse extends PipelineRun {
+  dashboard?: DashboardData;
+  persisted?: boolean;
+}
