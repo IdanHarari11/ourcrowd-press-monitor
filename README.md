@@ -6,7 +6,7 @@ This repository is the 2026 Full Stack Developer take-home. Reviewers can open t
 
 Live demo: https://ourcrowd-press-monitor.vercel.app
 
-Source (private): https://github.com/IdanHarari11/ourcrowd-press-monitor
+Source: https://github.com/IdanHarari11/ourcrowd-press-monitor
 
 ## What the assignment asked for, and how this repo meets it
 
