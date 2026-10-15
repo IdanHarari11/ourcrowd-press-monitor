@@ -4,9 +4,9 @@
   "private": true,
   "description": "Press mentions monitoring and dashboard for OurCrowd portfolio companies",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node api.js && next dev --turbopack",
+    "build": "node api.js && next build",
+    "start": "node api.js && next start",
     "lint": "eslint .",
     "ingest:companies": "tsx scripts/ingest-companies.ts",
     "collect": "tsx scripts/collect.ts",
