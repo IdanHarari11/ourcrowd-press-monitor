@@ -4,9 +4,9 @@
   "private": true,
   "description": "Press mentions monitoring and dashboard for OurCrowd portfolio companies",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node api.js && next dev --turbopack",
+    "build": "node api.js && next build",
+    "start": "node api.js && next start",
     "lint": "eslint .",
     "ingest:companies": "tsx scripts/ingest-companies.ts",
     "collect": "tsx scripts/collect.ts",
@@ -14,7 +14,8 @@
     "pipeline": "tsx scripts/pipeline.ts",
     "alert": "tsx scripts/alert.ts",
     "audit:relevance": "tsx scripts/audit-relevance.ts",
-    "test": "tsx --test src/lib/companies.test.ts src/lib/status.test.ts src/lib/alerts.test.ts src/lib/classifier/parse.test.ts src/lib/desk-query.test.ts src/lib/relevance.test.ts src/lib/news/url.test.ts src/lib/news/targets.test.ts src/lib/run-phase.test.ts"
+    "test": "tsx --test src/lib/companies.test.ts src/lib/status.test.ts src/lib/alerts.test.ts src/lib/classifier/parse.test.ts src/lib/desk-query.test.ts src/lib/relevance.test.ts src/lib/news/url.test.ts src/lib/news/targets.test.ts src/lib/run-phase.test.ts",
+    "security:check-no-loader": "node scripts/check-no-loader.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.50",
